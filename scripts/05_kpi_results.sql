@@ -18,6 +18,16 @@ UNION ALL SELECT * FROM kpi_8
 UNION ALL SELECT * FROM kpi_9
 UNION ALL SELECT * FROM kpi_10;
 
+
+-- Agregar columna numérica
+ALTER TABLE kpi_results
+ADD COLUMN kpi_value_num NUMERIC;
+
+-- Llenar la columna numérica donde el valor sea convertible a número
+UPDATE kpi_results
+SET kpi_value_num = kpi_value::NUMERIC
+WHERE kpi_name NOT IN ('kpi_8');
+
 -- Resultado final
 SELECT * FROM kpi_results
 ORDER BY kpi_name, kpi_key;
